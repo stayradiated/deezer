@@ -1,7 +1,6 @@
 package deezer
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/url"
 	"strconv"
@@ -14,7 +13,7 @@ type SearchRequest struct {
 	Index  int
 }
 
-func (s SearchRequest) Path() string {
+func (s SearchRequest) Tracks() string {
 	v := url.Values{}
 	v.Set("q", s.Query)
 
@@ -33,10 +32,4 @@ func (s SearchRequest) Path() string {
 	params := v.Encode()
 
 	return fmt.Sprintf("search/track?%s", params)
-}
-
-func (s SearchRequest) ParseJSON(d *json.Decoder) (interface{}, error) {
-	data := SearchResponse{}
-	err := d.Decode(&data)
-	return data, err
 }

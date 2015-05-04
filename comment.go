@@ -10,6 +10,10 @@ type Comment struct {
 	Author User     `json:"author"`
 }
 
+type CommentList struct {
+	Data []Comment
+}
+
 type CommentRequest struct {
 	Id int
 }

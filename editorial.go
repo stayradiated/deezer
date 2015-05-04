@@ -11,13 +11,6 @@ type EditorialList struct {
 	Data []Editorial
 }
 
-type Chart struct {
-	Tracks    TrackList    `json:"tracks"`
-	Albums    AlbumList    `json:"albums"`
-	Artists   ArtistList   `json:"artists"`
-	Playlists PlaylistList `json:"playlists"`
-}
-
 type EditorialRequest struct {
 	Id int
 }

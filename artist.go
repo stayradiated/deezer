@@ -15,6 +15,11 @@ type Artist struct {
 	Role      string `json:"role"`      //	The artist's role in a track or album
 }
 
+type ArtistList struct {
+	Data  []Artist `json:"data"`
+	Total int      `json:"total"`
+}
+
 type ArtistRequest struct {
 	Id int
 }
