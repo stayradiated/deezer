@@ -1,28 +1,42 @@
 package deezer
 
 import (
-	"encoding/json"
-	"net/http"
+	"errors"
+	"strconv"
+
+	"github.com/jmcvetta/napping"
 )
 
-type ApiRequest interface {
-	Path() string
-	ParseJSON(*json.Decoder) (interface{}, error)
+var BaseUrl = "https://api.deezer.com"
+
+func listParams(index, limit int) *napping.Params {
+	return &napping.Params{
+		"index": strconv.Itoa(index),
+		"limit": strconv.Itoa(limit),
+	}
 }
 
-func MakeRequest(a ApiRequest) interface{} {
-	url := "https://api.deezer.com/" + a.Path()
-
-	resp, err := http.Get(url)
+func get(path string, params *napping.Params, result interface{}) error {
+	url := BaseUrl + path
+	errMsg := ErrorResponse{}
+	_, err := napping.Get(url, params, result, &errMsg)
 	if err != nil {
-		panic(err)
+		return err
 	}
+	if errMsg.Error.Code != 0 {
+		return errors.New(errMsg.Error.String())
+	}
+	return nil
+}
 
-	d := json.NewDecoder(resp.Body)
-	data, err := a.ParseJSON(d)
+func Get(url string, result interface{}) error {
+	errMsg := ErrorResponse{}
+	_, err := napping.Get(url, nil, result, &errMsg)
 	if err != nil {
-		panic(err)
+		return err
 	}
-
-	return data
+	if errMsg.Error.Code != 0 {
+		return errors.New(errMsg.Error.String())
+	}
+	return nil
 }

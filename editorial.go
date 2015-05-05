@@ -3,34 +3,47 @@ package deezer
 import "fmt"
 
 type Editorial struct {
-	Id   int    `json:"id"`   // The editorial's Deezer id
-	Name string `json:"name"` // The editorial's name
+	Id   int    `json:"id,omitempty"`   // The editorial's Deezer id
+	Name string `json:"name,omitempty"` // The editorial's name
 }
 
 type EditorialList struct {
-	Data []Editorial
+	Data  []Editorial `json:"data,omitempty"`
+	Total int         `json:"total,omitempty"`
+	Next  string      `json:"next,omitempty"`
 }
 
-type EditorialRequest struct {
-	Id int
+func GetEditorials() (EditorialList, error) {
+	path := "/editorial"
+	result := EditorialList{}
+	err := get(path, nil, &result)
+	return result, err
 }
 
-func (e EditorialRequest) All() string {
-	return "editorial" // EditorialList
+func GetEditorial(id int) (Editorial, error) {
+	path := fmt.Sprintf("editorial/%d", id)
+	result := Editorial{}
+	err := get(path, nil, &result)
+	return result, err
 }
 
-func (e EditorialRequest) Get() string {
-	return fmt.Sprintf("editorial/%d", e.Id) // Editorial
+func GetEditorialSelection(id int, date string, index, limit int) (AlbumList, error) {
+	path := fmt.Sprintf("editorial/%d/selection", id)
+	result := AlbumList{}
+	err := get(path, listParams(index, limit), &result)
+	return result, err
 }
 
-func (e EditorialRequest) Selection() string {
-	return fmt.Sprintf("editorial/%d/selection", e.Id) // AlbumList
+func GetEditorialCharts(id, index, limit int) (Chart, error) {
+	path := fmt.Sprintf("editorial/%d/charts", id)
+	result := Chart{}
+	err := get(path, listParams(index, limit), &result)
+	return result, err
 }
 
-func (e EditorialRequest) Charts() string {
-	return fmt.Sprintf("editorial/%d/charts", e.Id) // ChartList
-}
-
-func (e EditorialRequest) Releases() string {
-	return fmt.Sprintf("editorial/%d/releases", e.Id) // AlbumList
+func GetEditorialReleases(id, index, limit int) (AlbumList, error) {
+	path := fmt.Sprintf("editorial/%d/releases", id)
+	result := AlbumList{}
+	err := get(path, listParams(index, limit), &result)
+	return result, err
 }

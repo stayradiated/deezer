@@ -3,51 +3,60 @@ package deezer
 import "fmt"
 
 type Album struct {
-	Id          int     `json:"id"`           // The Deezer album id
-	Title       string  `json:"title"`        // The album title
-	UPC         string  `json:"upc"`          // The album UPC
-	Link        string  `json:"link"`         // The url of the album on Deezer url
-	Share       string  `json:"share"`        // The share link of the album on Deezer
-	Cover       string  `json:"cover"`        // The url of the album's cover.
-	GenreId     int     `json:"genre_id"`     // The album's first genre id. NB : -1 for not found
-	Genres      []Genre `json:"genres"`       // List of genre object
-	Label       string  `json:"label"`        // The album's label name
-	NbTracks    int     `json:"nb_tracks"`    // Number of tracks
-	Duration    int     `json:"duration"`     // The album's duration (seconds)
-	Fans        int     `json:"fans"`         // The number of album's Fans
-	Rating      int     `json:"rating"`       // The playlist's rate
-	ReleaseDate int     `json:"release_date"` // The album's release date
-	Record_type string  `json:"record_type"`  // The record type of the album (EP / ALBUM / etc..)
-	Available   bool    `json:"available"`    // If the album is avaiable
-	// Alternative    Album    `json:"alternative"`     // Return an alternative album object if the current album is not available
-	Tracklist      string   `json:"tracklist"`       // API Link to the tracklist of this album
-	ExplicitLyrics bool     `json:"explicit_lyrics"` // Whether the album contains explicit lyrics
-	Contributors   []Artist `json:"contributors"`    // Return a list of contributors on the album
-	Artist         Artist   `json:"artist"`          // artist object containing : id, name, picture
-	Tracks         []Track  `json:"tracks"`          // list of track
+	Id          int       `json:"id,omitempty"`           // The Deezer album id
+	Title       string    `json:"title,omitempty"`        // The album title
+	UPC         string    `json:"upc,omitempty"`          // The album UPC
+	Link        string    `json:"link,omitempty"`         // The url of the album on Deezer url
+	Share       string    `json:"share,omitempty"`        // The share link of the album on Deezer
+	Cover       string    `json:"cover,omitempty"`        // The url of the album's cover.
+	GenreId     int       `json:"genre_id,omitempty"`     // The album's first genre id. NB : -1 for not found
+	Genres      GenreList `json:"genres,omitempty"`       // List of genre object
+	Label       string    `json:"label,omitempty"`        // The album's label name
+	NbTracks    int       `json:"nb_tracks,omitempty"`    // Number of tracks
+	Duration    int       `json:"duration,omitempty"`     // The album's duration (seconds)
+	Fans        int       `json:"fans,omitempty"`         // The number of album's Fans
+	Rating      int       `json:"rating,omitempty"`       // The playlist's rate
+	ReleaseDate string    `json:"release_date,omitempty"` // The album's release date
+	Record_type string    `json:"record_type,omitempty"`  // The record type of the album (EP / ALBUM / etc..)
+	Available   bool      `json:"available,omitempty"`    // If the album is avaiable
+	// Alternative    Album    `json:"alternative,omitempty"`     // Return an alternative album object if the current album is not available
+	Tracklist      string    `json:"tracklist,omitempty"`       // API Link to the tracklist of this album
+	ExplicitLyrics bool      `json:"explicit_lyrics,omitempty"` // Whether the album contains explicit lyrics
+	Contributors   []Artist  `json:"contributors,omitempty"`    // Return a list of contributors on the album
+	Artist         Artist    `json:"artist,omitempty"`          // artist object containing : id, name, picture
+	Tracks         TrackList `json:"tracks,omitempty"`          // list of track
 }
 
 type AlbumList struct {
-	Data  []Album `json:"data"`
-	Total int     `json:"total"`
+	Data  []Album `json:"data,omitempty"`
+	Total int     `json:"total,omitempty"`
+	Next  string  `json:"next,omitempty"`
 }
 
-type AlbumRequest struct {
-	Id int
+func GetAlbum(id int) (Album, error) {
+	path := fmt.Sprintf("/album/%d", id)
+	result := Album{}
+	err := get(path, nil, &result)
+	return result, err
 }
 
-func (a AlbumRequest) Get() string {
-	return fmt.Sprintf("album/%d", a.Id) // Album
+func GetAlbumComments(id, index, limit int) (CommentList, error) {
+	path := fmt.Sprintf("/album/%d/comments", id)
+	result := CommentList{}
+	err := get(path, listParams(index, limit), &result)
+	return result, err
 }
 
-func (a AlbumRequest) Comments() string {
-	return fmt.Sprintf("album/%d/comments", a.Id) // CommentList
+func GetAlbumFans(id, index, limit int) (UserList, error) {
+	path := fmt.Sprintf("/album/%d/fans", id)
+	result := UserList{}
+	err := get(path, listParams(index, limit), &result)
+	return result, err
 }
 
-func (a AlbumRequest) Fans() string {
-	return fmt.Sprintf("album/%d/fans", a.Id) // UserList
-}
-
-func (a AlbumRequest) Tracks() string {
-	return fmt.Sprintf("album/%d/tracks", a.Id) // TrackList
+func GetAlbumTracks(id, index, limit int) (TrackList, error) {
+	path := fmt.Sprintf("/album/%d/tracks", id)
+	result := TrackList{}
+	err := get(path, listParams(index, limit), &result)
+	return result, err
 }
