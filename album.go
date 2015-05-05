@@ -17,7 +17,7 @@ type Album struct {
 	Fans        int       `json:"fans,omitempty"`         // The number of album's Fans
 	Rating      int       `json:"rating,omitempty"`       // The playlist's rate
 	ReleaseDate string    `json:"release_date,omitempty"` // The album's release date
-	Record_type string    `json:"record_type,omitempty"`  // The record type of the album (EP / ALBUM / etc..)
+	RecordType  string    `json:"record_type,omitempty"`  // The record type of the album (EP / ALBUM / etc..)
 	Available   bool      `json:"available,omitempty"`    // If the album is avaiable
 	// Alternative    Album    `json:"alternative,omitempty"`     // Return an alternative album object if the current album is not available
 	Tracklist      string    `json:"tracklist,omitempty"`       // API Link to the tracklist of this album
