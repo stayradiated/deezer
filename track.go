@@ -31,9 +31,9 @@ type TrackList struct {
 	Next  string  `json:"next"`
 }
 
-func GetTrack(id int) (TrackList, error) {
+func GetTrack(id int) (Track, error) {
 	path := fmt.Sprintf("/track/%d", id)
-	result := TrackList{}
+	result := Track{}
 	err := get(path, nil, &result)
 	return result, err
 }
