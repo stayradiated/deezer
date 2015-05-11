@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func NoTestGetPlaylist(t *testing.T) {
+func TestGetPlaylist(t *testing.T) {
 	result, err := GetPlaylist(785141981)
 	if err != nil {
 		t.Fatal(err)
@@ -15,7 +15,7 @@ func NoTestGetPlaylist(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestGetPlaylistComments(t *testing.T) {
+func TestGetPlaylistComments(t *testing.T) {
 	result, err := GetPlaylistComments(785141981, 0, 0)
 	if err != nil {
 		t.Fatal(err)
@@ -24,7 +24,7 @@ func NoTestGetPlaylistComments(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestGetPlaylistFans(t *testing.T) {
+func TestGetPlaylistFans(t *testing.T) {
 	result, err := GetPlaylistFans(785141981, 0, 0)
 	if err != nil {
 		t.Fatal(err)
@@ -33,7 +33,7 @@ func NoTestGetPlaylistFans(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestGetPlaylistTracks(t *testing.T) {
+func TestGetPlaylistTracks(t *testing.T) {
 	result, err := GetPlaylistTracks(785141981, 0, 0)
 	if err != nil {
 		t.Fatal(err)

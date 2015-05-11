@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestAlbumRequestGet(t *testing.T) {
+func TestGetAlbumGet(t *testing.T) {
 	result, err := GetAlbum(6575789)
 	if err != nil {
 		t.Fatal(err)
@@ -15,7 +15,7 @@ func TestAlbumRequestGet(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func TestAlbumRequestTracks(t *testing.T) {
+func TestGetAlbumTracks(t *testing.T) {
 	result, err := GetAlbumTracks(6575789, 0, 0)
 	if err != nil {
 		t.Fatal(err)
@@ -24,7 +24,7 @@ func TestAlbumRequestTracks(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func TestAlbumRequestComments(t *testing.T) {
+func TestGetAlbumComments(t *testing.T) {
 	result, err := GetAlbumComments(6575789, 0, 0)
 	if err != nil {
 		t.Fatal(err)
@@ -33,7 +33,7 @@ func TestAlbumRequestComments(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func TestAlbumRequestFans(t *testing.T) {
+func TestGetAlbumFans(t *testing.T) {
 	result, err := GetAlbumFans(6575789, 0, 0)
 	if err != nil {
 		t.Fatal(err)

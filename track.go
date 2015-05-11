@@ -13,7 +13,7 @@ type Track struct {
 	TrackPosition      int      `json:"track_position,omitempty"`      // The position of the track in its album
 	DiskNumber         int      `json:"disk_number,omitempty"`         // The track's album's disk number
 	Rank               int      `json:"rank,omitempty"`                // The track's Deezer rank
-	ReleaseDate        int      `json:"release_date,omitempty"`        // The track's release date
+	ReleaseDate        string   `json:"release_date,omitempty"`        // The track's release date
 	ExplicitLyrics     bool     `json:"explicit_lyrics,omitempty"`     // Whether the track contains explicit lyrics
 	Preview            string   `json:"preview,omitempty"`             // The url of track's preview file. This file contains the first 30 seconds of the track
 	Bpm                float64  `json:"bpm,omitempty"`                 // Beats per minute

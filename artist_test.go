@@ -8,9 +8,11 @@ import (
 
 func TestGetArtist(t *testing.T) {
 	result, err := GetArtist(27)
+	if err != nil {
+		t.Fatal(err)
+	}
 	json, _ := json.Marshal(result)
 	fmt.Println(string(json))
-	fmt.Println(err)
 }
 
 func TestGetArtistTop(t *testing.T) {

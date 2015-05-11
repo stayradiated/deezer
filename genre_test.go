@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func NoTestGetGenres(t *testing.T) {
+func TestGetGenres(t *testing.T) {
 	result, err := GetGenres()
 	if err != nil {
 		t.Fatal(err)
@@ -15,7 +15,7 @@ func NoTestGetGenres(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestGetGenre(t *testing.T) {
+func TestGetGenre(t *testing.T) {
 	result, err := GetGenre(85)
 	if err != nil {
 		t.Fatal(err)
@@ -24,7 +24,7 @@ func NoTestGetGenre(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestGetGenreArtists(t *testing.T) {
+func TestGetGenreArtists(t *testing.T) {
 	result, err := GetGenreArtists(85)
 	if err != nil {
 		t.Fatal(err)
@@ -33,7 +33,7 @@ func NoTestGetGenreArtists(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestGetGenreRadios(t *testing.T) {
+func TestGetGenreRadios(t *testing.T) {
 	result, err := GetGenreRadios(85)
 	if err != nil {
 		t.Fatal(err)

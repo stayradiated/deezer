@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func NoTestSearchTrack(t *testing.T) {
+func TestSearchTrack(t *testing.T) {
 	result, err := SearchTrack("Stornoway Zorbing", false, RANKING, 0, 0)
 	if err != nil {
 		t.Fatal(err)
@@ -15,7 +15,7 @@ func NoTestSearchTrack(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestSearchArtist(t *testing.T) {
+func TestSearchArtist(t *testing.T) {
 	result, err := SearchArtist("Squirrel Nut Zippers", false, RANKING, 0, 0)
 	if err != nil {
 		t.Fatal(err)
@@ -24,7 +24,7 @@ func NoTestSearchArtist(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestSearchAlbum(t *testing.T) {
+func TestSearchAlbum(t *testing.T) {
 	result, err := SearchAlbum("Fleetwood Mac Rumours", false, RANKING, 0, 0)
 	if err != nil {
 		t.Fatal(err)
@@ -33,7 +33,7 @@ func NoTestSearchAlbum(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestSearchUser(t *testing.T) {
+func TestSearchUser(t *testing.T) {
 	result, err := SearchUser("stayrad", false, RANKING, 0, 0)
 	if err != nil {
 		t.Fatal(err)
@@ -42,7 +42,7 @@ func NoTestSearchUser(t *testing.T) {
 	fmt.Println(string(json))
 }
 
-func NoTestSearchPlaylist(t *testing.T) {
+func TestSearchPlaylist(t *testing.T) {
 	result, err := SearchPlaylist("Super Hits", false, RANKING, 0, 0)
 	if err != nil {
 		t.Fatal(err)
