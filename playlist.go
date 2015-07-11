@@ -3,7 +3,7 @@ package deezer
 import "fmt"
 
 type Playlist struct {
-	Id            int       `json:"id,omitempty"`             // The playlist's Deezer id
+	ID            int       `json:"id,omitempty"`             // The playlist's Deezer id
 	Title         string    `json:"title,omitempty"`          // The playlist's title
 	Description   string    `json:"description,omitempty"`    // The playlist description
 	Duration      int       `json:"duration,omitempty"`       // The playlist's duration (seconds)

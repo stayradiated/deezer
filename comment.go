@@ -3,7 +3,7 @@ package deezer
 import "fmt"
 
 type Comment struct {
-	Id     int      `json:"id,omitempty"`
+	ID     int      `json:"id,omitempty"`
 	Text   string   `json:"text,omitempty"`
 	Date   int      `json:"date,omitempty"`
 	Object Playlist `json:"object,omitempty"`

@@ -3,13 +3,13 @@ package deezer
 import "fmt"
 
 type Album struct {
-	Id          int       `json:"id,omitempty"`           // The Deezer album id
+	ID          int       `json:"id,omitempty"`           // The Deezer album id
 	Title       string    `json:"title,omitempty"`        // The album title
 	UPC         string    `json:"upc,omitempty"`          // The album UPC
 	Link        string    `json:"link,omitempty"`         // The url of the album on Deezer url
 	Share       string    `json:"share,omitempty"`        // The share link of the album on Deezer
 	Cover       string    `json:"cover,omitempty"`        // The url of the album's cover.
-	GenreId     int       `json:"genre_id,omitempty"`     // The album's first genre id. NB : -1 for not found
+	GenreID     int       `json:"genre_id,omitempty"`     // The album's first genre id. NB : -1 for not found
 	Genres      GenreList `json:"genres,omitempty"`       // List of genre object
 	Label       string    `json:"label,omitempty"`        // The album's label name
 	NbTracks    int       `json:"nb_tracks,omitempty"`    // Number of tracks

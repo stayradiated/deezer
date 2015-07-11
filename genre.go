@@ -3,7 +3,7 @@ package deezer
 import "fmt"
 
 type Genre struct {
-	Id   int    `json:"id,omitempty"`
+	ID   int    `json:"id,omitempty"`
 	Name string `json:"name,omitempty"`
 }
 

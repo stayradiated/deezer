@@ -3,7 +3,7 @@ package deezer
 import "fmt"
 
 type Track struct {
-	Id                 int      `json:"id,omitempty"`                  // The track's Deezer id
+	ID                 int      `json:"id,omitempty"`                  // The track's Deezer id
 	Readable           bool     `json:"readable,omitempty"`            // true if the track is readable in the player for the current user
 	Title              string   `json:"title,omitempty"`               // The track's title
 	Isrc               string   `json:"isrc,omitempty"`                // The track isrc

@@ -3,7 +3,7 @@ package deezer
 import "fmt"
 
 type Radio struct {
-	Id          int    `json:"id,omitempty"`          //	The radio deezeid
+	ID          int    `json:"id,omitempty"`          //	The radio deezeid
 	Title       string `json:"title,omitempty"`       //	The radio title
 	Description string `json:"description,omitempty"` //	The radio title
 	Share       string `json:"share,omitempty"`       //	The share link of the radio on Deezer
@@ -16,7 +16,7 @@ type RadioList struct {
 }
 
 type GenreRadio struct {
-	Id     int     `json:"id,omitempty"`
+	ID     int     `json:"id,omitempty"`
 	Title  string  `json:"title,omitempty"`
 	Radios []Radio `json:"radios,omitempty"`
 }

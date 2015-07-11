@@ -3,7 +3,7 @@ package deezer
 import "fmt"
 
 type Editorial struct {
-	Id   int    `json:"id,omitempty"`   // The editorial's Deezer id
+	ID   int    `json:"id,omitempty"`   // The editorial's Deezer id
 	Name string `json:"name,omitempty"` // The editorial's name
 }
 

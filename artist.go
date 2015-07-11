@@ -3,7 +3,7 @@ package deezer
 import "fmt"
 
 type Artist struct {
-	Id        int    `json:"id,omitempty"`        //	The artist's Deezer id
+	ID        int    `json:"id,omitempty"`        //	The artist's Deezer id
 	Name      string `json:"name,omitempty"`      //	name	The artist's name
 	Link      string `json:"link,omitempty"`      //	The url of the artist on Deezer
 	Share     string `json:"share,omitempty"`     //	The share link of the artist on Deezer
