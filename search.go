@@ -1,9 +1,8 @@
 package deezer
 
 import (
+	"net/url"
 	"strconv"
-
-	"github.com/jmcvetta/napping"
 )
 
 const (
@@ -20,14 +19,14 @@ const (
 	DURATION_DESC = "DURATION_DESC"
 )
 
-func searchParams(query string, strict bool, order string, index, limit int) *napping.Params {
-	return &napping.Params{
-		"q":      query,
-		"strict": strconv.FormatBool(strict),
-		"order":  order,
-		"index":  strconv.Itoa(index),
-		"limit":  strconv.Itoa(limit),
-	}
+func searchParams(query string, strict bool, order string, index, limit int) *url.Values {
+	v := &url.Values{}
+	v.Set("q", query)
+	v.Set("strict", strconv.FormatBool(strict))
+	v.Set("order", order)
+	v.Set("index", strconv.Itoa(index))
+	v.Set("limit", strconv.Itoa(limit))
+	return v
 }
 
 func SearchTrack(query string, strict bool, order string, index, limit int) (TrackList, error) {

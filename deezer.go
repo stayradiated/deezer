@@ -2,6 +2,7 @@ package deezer
 
 import (
 	"errors"
+	"net/url"
 	"strconv"
 
 	"github.com/jmcvetta/napping"
@@ -9,14 +10,14 @@ import (
 
 var BaseUrl = "http://api.deezer.com"
 
-func listParams(index, limit int) *napping.Params {
-	return &napping.Params{
-		"index": strconv.Itoa(index),
-		"limit": strconv.Itoa(limit),
-	}
+func listParams(index, limit int) *url.Values {
+	v := &url.Values{}
+	v.Set("index", strconv.Itoa(index))
+	v.Set("limit", strconv.Itoa(limit))
+	return v
 }
 
-func get(path string, params *napping.Params, result interface{}) error {
+func get(path string, params *url.Values, result interface{}) error {
 	url := BaseUrl + path
 	errMsg := ErrorResponse{}
 	_, err := napping.Get(url, params, result, &errMsg)
