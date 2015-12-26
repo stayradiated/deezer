@@ -1,6 +1,9 @@
 package deezer
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type Track struct {
 	ID                 int      `json:"id,omitempty"`                  // The track's Deezer id
@@ -21,14 +24,27 @@ type Track struct {
 	AvailableCountries []string `json:"available_countries,omitempty"` // List of countries where the track is available
 	// Alternative         Track    `json:"alternative,omitempty"`         // Return an alternative readable track if the current track is not readable
 	Contributors []Artist `json:"contributors,omitempty"` // Return a list of contributors on the track
-	Artist       Artist   `json:"artist,omitempty"`       // artist object containing : id, name, link, share, picture, nb_album, nb_fan, radio, tracklist, role
-	Album        Album    `json:"album,omitempty"`        // album object containing : id, title, link, cover, release_date
+	Artist       *Artist  `json:"artist,omitempty"`       // artist object containing : id, name, link, share, picture, nb_album, nb_fan, radio, tracklist, role
+	Album        *Album   `json:"album,omitempty"`        // album object containing : id, title, link, cover, release_date
 }
 
-type TrackList struct {
+type ExtendedTrackList struct {
 	Data  []Track `json:"data"`
 	Total int     `json:"total"`
 	Next  string  `json:"next"`
+}
+
+type TrackList []Track
+
+func (t *TrackList) UnmarshalJSON(data []byte) error {
+	extendedTrackList := ExtendedTrackList{}
+	if err := json.Unmarshal(data, &extendedTrackList); err != nil {
+		return err
+	}
+
+	*t = extendedTrackList.Data
+
+	return nil
 }
 
 func GetTrack(id int) (Track, error) {

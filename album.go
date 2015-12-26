@@ -23,7 +23,7 @@ type Album struct {
 	Tracklist      string    `json:"tracklist,omitempty"`       // API Link to the tracklist of this album
 	ExplicitLyrics bool      `json:"explicit_lyrics,omitempty"` // Whether the album contains explicit lyrics
 	Contributors   []Artist  `json:"contributors,omitempty"`    // Return a list of contributors on the album
-	Artist         Artist    `json:"artist,omitempty"`          // artist object containing : id, name, picture
+	Artist         *Artist   `json:"artist,omitempty"`          // artist object containing : id, name, picture
 	Tracks         TrackList `json:"tracks,omitempty"`          // list of track
 }
 
