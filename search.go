@@ -1,6 +1,7 @@
 package deezer
 
 import (
+	"fmt"
 	"net/url"
 	"strconv"
 )
@@ -62,4 +63,43 @@ func SearchPlaylist(query string, strict bool, order string, index, limit int) (
 	result := PlaylistList{}
 	err := get(path, searchParams(query, strict, order, index, limit), &result)
 	return result, err
+}
+
+type AdvancedSearch struct {
+	Artist string
+	Album  string
+	Track  string
+	Label  string
+	DurMin int
+	DurMax int
+	BPMMin int
+	BPMMax int
+}
+
+func (a AdvancedSearch) String() (s string) {
+	if a.Artist != "" {
+		s += fmt.Sprintf("artist:\"%s\" ", a.Artist)
+	}
+	if a.Album != "" {
+		s += fmt.Sprintf("album:\"%s\" ", a.Album)
+	}
+	if a.Track != "" {
+		s += fmt.Sprintf("track:\"%s\" ", a.Track)
+	}
+	if a.Label != "" {
+		s += fmt.Sprintf("label:\"%s\" ", a.Track)
+	}
+	if a.DurMin > 0 {
+		s += fmt.Sprintf("dur_min:\"%d\" ", a.DurMin)
+	}
+	if a.DurMax > 0 {
+		s += fmt.Sprintf("dur_max:\"%d\" ", a.DurMax)
+	}
+	if a.BPMMin > 0 {
+		s += fmt.Sprintf("bpm_max:\"%d\" ", a.BPMMin)
+	}
+	if a.BPMMax > 0 {
+		s += fmt.Sprintf("bpm_max:\"%d\" ", a.BPMMax)
+	}
+	return s
 }

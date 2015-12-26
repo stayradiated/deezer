@@ -50,3 +50,15 @@ func TestSearchPlaylist(t *testing.T) {
 	json, _ := json.Marshal(result)
 	fmt.Println(string(json))
 }
+
+func TestAdvancedSearch(t *testing.T) {
+	query := AdvancedSearch{
+		Artist: "stornoway",
+		Album:  "bonxie",
+		Track:  "zorbing",
+	}.String()
+
+	if query != "artist:\"stornoway\" album:\"bonxie\" track:\"zorbing\" " {
+		t.Fatal()
+	}
+}
