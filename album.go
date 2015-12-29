@@ -1,6 +1,9 @@
 package deezer
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type Album struct {
 	ID          int       `json:"id,omitempty"`           // The Deezer album id
@@ -27,10 +30,23 @@ type Album struct {
 	Tracks         TrackList `json:"tracks,omitempty"`          // list of track
 }
 
-type AlbumList struct {
+type ExtendedAlbumList struct {
 	Data  []Album `json:"data,omitempty"`
 	Total int     `json:"total,omitempty"`
 	Next  string  `json:"next,omitempty"`
+}
+
+type AlbumList []Album
+
+func (a *AlbumList) UnmarshalJSON(data []byte) error {
+	extendedAlbumList := ExtendedAlbumList{}
+	if err := json.Unmarshal(data, &extendedAlbumList); err != nil {
+		return err
+	}
+
+	*a = extendedAlbumList.Data
+
+	return nil
 }
 
 func GetAlbum(id int) (Album, error) {

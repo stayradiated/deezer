@@ -1,6 +1,9 @@
 package deezer
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type Playlist struct {
 	ID            int       `json:"id,omitempty"`             // The playlist's Deezer id
@@ -16,14 +19,27 @@ type Playlist struct {
 	Share         string    `json:"share,omitempty"`          // The share link of the playlist on Deezer
 	Picture       string    `json:"picture,omitempty"`        // The url of the playlist's cover.
 	Checksum      string    `json:"hecksum,omitempty"`        // The checksum for the track list
-	Creator       User      `json:"creator,omitempty"`        // User object containing : id, name
+	Creator       *User     `json:"creator,omitempty"`        // User object containing : id, name
 	Tracks        TrackList `json:"tracks,omitempty"`         // List of tracks
 }
 
-type PlaylistList struct {
+type ExtendedPlaylistList struct {
 	Data  []Playlist `json:"data,omitempty"`
 	Total int        `json:"total,omitempty"`
 	Next  string     `json:"next,omitempty"`
+}
+
+type PlaylistList []Playlist
+
+func (p *PlaylistList) UnmarshalJSON(data []byte) error {
+	extendedPlaylistList := ExtendedPlaylistList{}
+	if err := json.Unmarshal(data, &extendedPlaylistList); err != nil {
+		return err
+	}
+
+	*p = extendedPlaylistList.Data
+
+	return nil
 }
 
 func GetPlaylist(id int) (Playlist, error) {
