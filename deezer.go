@@ -8,7 +8,7 @@ import (
 	"github.com/jmcvetta/napping"
 )
 
-var BaseUrl = "http://api.deezer.com"
+var BaseUrl = "https://api.deezer.com"
 
 func listParams(index, limit int) *url.Values {
 	v := &url.Values{}
