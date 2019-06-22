@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	redirectURI = "http://localhost:10029"
+	redirectURI = "http://localhost:3009"
 )
 
 var TokenPath string = ""
@@ -40,7 +40,7 @@ func Login(applicationId string, applicationSecret string) error {
 	ch := make(chan string)
 
 	http.Handle("/", &authHandler{state: state, ch: ch, applicationId: applicationId, applicationSecret: applicationSecret})
-	go http.ListenAndServe("localhost:10029", nil)
+	go http.ListenAndServe(":3009", nil)
 
 	url := fmt.Sprintf("https://connect.deezer.com/oauth/auth.php?app_id=%s&redirect_uri=%s&perms=basic_access,email", applicationId, redirectURI)
 	fmt.Println("Please log in to Deezer by visiting the following page in your browser:", url)
@@ -111,6 +111,8 @@ type authHandler struct {
 }
 
 func (a *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+
+	fmt.Println("request handled")
 
 	if a.token != "" {
 		return
