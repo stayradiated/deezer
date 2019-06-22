@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"strconv"
 
+	"fmt"
 	"github.com/jmcvetta/napping"
 )
 
@@ -18,9 +19,31 @@ func listParams(index, limit int) *url.Values {
 }
 
 func get(path string, params *url.Values, result interface{}) error {
-	url := BaseUrl + path
+	request_url := BaseUrl + path
 	errMsg := ErrorResponse{}
-	_, err := napping.Get(url, params, result, &errMsg)
+
+	// auth
+	var err error
+	if Token == "" {
+		Token, err = ReadToken()
+		if err != nil {
+			fmt.Println(err)
+			err = Login(ApplicationId, ApplicationSecret)
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+		}
+	}
+
+	if params == nil {
+		params = &url.Values{}
+	}
+
+	params.Set("access_token", Token)
+	// auth
+
+	_, err = napping.Get(request_url, params, result, &errMsg)
 	if err != nil {
 		return err
 	}

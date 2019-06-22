@@ -20,8 +20,12 @@ const (
 
 var TokenPath string = ""
 var Token string = ""
+var ApplicationId = ""
+var ApplicationSecret = ""
 
-func init() {
+func Init(applicationId string, applicationSecret string) {
+	ApplicationId = applicationId
+	ApplicationSecret = applicationSecret
 }
 
 func Login(applicationId string, applicationSecret string) error {
